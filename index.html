@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tax, Wealth & Your Next Move · EO Barcelona</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#040928; --navy2:#0D1645; --teal:#23A991; --gold:#EEB454; --orange:#F0693F; --pink:#E23A6E; --blue:#3D49C0;
+    --ink:#0B1238; --muted:#5A6382; --line:#D6DBE8; --mist:#EEF1F7; --paper:#FFFFFF;
+    --stripe:linear-gradient(90deg,var(--blue),var(--pink),var(--orange),var(--gold),var(--teal));
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',Arial,sans-serif;-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.55}
+  button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+
+  /* top bar */
+  .top{position:fixed;top:0;left:0;right:0;z-index:5;background:linear-gradient(var(--paper) 72%,rgba(255,255,255,0));padding:0 20px 18px}
+  .top:before{content:"";display:block;height:4px;background:var(--stripe);margin:0 -20px 12px}
+  .top-in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:14px}
+  .top img{height:30px;width:30px;border-radius:50%;display:block}
+  .bar{flex:1;height:3px;background:var(--mist);border-radius:3px;position:relative;overflow:hidden}
+  .bar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--orange);transition:width .5s ease}
+  .count{font-size:12px;font-weight:600;color:var(--muted);min-width:60px;text-align:right}
+  .top.hide{opacity:0;pointer-events:none}
+
+  /* screens */
+  .screen{display:none;min-height:100vh;min-height:100dvh;padding:88px 20px 140px}
+  .screen.on{display:block;animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .wrap{max-width:640px;margin:0 auto}
+  .label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+  h1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(36px,10vw,56px);line-height:1.04;letter-spacing:-.01em;margin-bottom:14px}
+  h2{font-family:'Montserrat',sans-serif;font-weight:700;font-size:clamp(22px,5.4vw,29px);line-height:1.2;margin-bottom:10px}
+  .hint{font-size:14.5px;color:var(--muted);margin-bottom:22px}
+  p.body{font-size:16px;margin-bottom:14px}
+
+  /* hero */
+  .hero{display:none;min-height:100vh;min-height:100dvh;background:var(--navy);color:#fff;padding:0 0 48px;position:relative;overflow:hidden}
+  .hero.on{display:block;animation:fade .7s ease both}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .hero:before{content:"";display:block;height:5px;background:var(--stripe)}
+  .hero .glow{position:absolute;top:-120px;left:50%;width:520px;height:520px;transform:translateX(-50%);background:radial-gradient(circle,rgba(61,73,192,.28),rgba(4,9,40,0) 65%);pointer-events:none}
+  .hero .in{position:relative;max-width:640px;margin:0 auto;padding:28px 22px 0}
+  .logo{display:block;width:min(52vw,210px);height:auto;margin:6px auto 22px;mix-blend-mode:lighten}
+  .hero .label{text-align:center;color:var(--teal)}
+  .hero h1{text-align:center;color:#fff}
+  .hero h1 span{background:linear-gradient(90deg,var(--orange),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .tagline{text-align:center;font-family:'Montserrat',sans-serif;font-weight:600;font-size:16.5px;color:var(--gold);margin-bottom:18px}
+  .meta{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 24px}
+  .meta span{border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:6px 12px;font-size:13.5px;font-weight:600;color:#E6E9F5}
+  .hero p.body{color:#D3D8EA;font-size:15.5px}
+  .confirm{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-left:4px solid var(--orange);border-radius:10px;padding:16px 18px;margin:22px 0 24px}
+  .confirm b{font-family:'Montserrat',sans-serif;font-weight:700;font-size:16.5px;display:block;margin-bottom:4px;color:#fff}
+  .confirm p{font-size:14.5px;color:#D3D8EA}
+  .confirm small{display:block;margin-top:10px;font-size:13px;color:var(--gold);font-weight:600}
+  .hero .btn{width:100%}
+  .confirm{margin-bottom:12px}
+  .anon{background:rgba(35,169,145,.08);border:1px solid rgba(35,169,145,.35);border-left:4px solid var(--teal);border-radius:10px;padding:14px 18px;margin:0 0 24px}
+  .anon b{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15.5px;display:block;margin-bottom:4px;color:#fff}
+  .anon b:before{content:"\1F512";margin-right:8px;font-size:14px}
+  .anon p{font-size:14.5px;color:#D3D8EA}
+
+  /* tax illustration */
+  .art{display:block;width:min(86vw,360px);height:auto;margin:-6px auto 6px}
+  .art .float1{animation:bob 6s ease-in-out infinite}
+  .art .float2{animation:bob 7s ease-in-out -2s infinite}
+  .art .float3{animation:bob 8s ease-in-out -4s infinite}
+  .art .route{stroke-dasharray:5 7;animation:dash 3s linear infinite}
+  .art .spin{transform-origin:260px 250px;animation:spin 90s linear infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes dash{to{stroke-dashoffset:-48}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .hero .grid > *{min-width:0}
+  .themes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:4px 0 0;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#AEB6D6}
+  .themes i{font-style:normal;color:var(--gold);margin-right:6px}
+
+  @media (min-width:960px){
+    .hero{display:none;padding-bottom:64px}
+    .hero.on{display:flex;align-items:center}
+    .hero:before{position:absolute;top:0;left:0;right:0}
+    .hero .glow{left:72%;top:8%;width:820px;height:820px}
+    .hero .in{max-width:1220px;width:100%;padding:56px 48px 0}
+    .hero .grid{display:grid;grid-template-columns:1.02fr .98fr;gap:64px;align-items:center}
+    .hero .logo{margin:0 0 28px;width:180px}
+    .hero .label,.hero h1,.tagline{text-align:left}
+    .hero h1{font-size:64px}
+    .meta{justify-content:flex-start}
+    .art{width:100%;max-width:540px;margin:0 auto}
+    .themes{margin-top:10px}
+    .hero .btn{width:auto;padding:16px 46px}
+    .art-m{display:none}
+  }
+  @media (max-width:959px){ .art-d{display:none} .hero .logo{width:min(40vw,150px);margin-bottom:8px} }
+
+  /* desktop: questions sit on a card */
+  @media (min-width:960px){
+    body{background:var(--mist)}
+    .top{background:linear-gradient(var(--mist) 72%,rgba(238,241,247,0))}
+    .nav{background:linear-gradient(rgba(238,241,247,0),var(--mist) 35%)}
+    .screen:not(.end) .wrap{background:#fff;border-radius:20px;padding:44px 52px 40px;box-shadow:0 18px 50px rgba(11,18,56,.08)}
+    .screen:not(.end) .wrap .card{background:var(--mist)}
+  }
+  @media (prefers-reduced-motion:reduce){ .art *{animation:none!important} }
+
+  /* info cards */
+  .card{background:var(--mist);border-radius:12px;padding:16px 18px;margin-bottom:10px}
+  .card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:6px}
+  .card p{font-size:15.5px}
+  .dilemmas{display:grid;gap:8px;margin-top:8px}
+  .dilemmas div{background:#fff;border-radius:8px;padding:11px 12px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;display:flex;gap:12px;align-items:baseline}
+  .dilemmas div b{font-weight:800}
+  .dilemmas div:nth-child(1) b{color:var(--orange)} .dilemmas div:nth-child(2) b{color:var(--pink)} .dilemmas div:nth-child(3) b{color:var(--blue)}
+  .fine{font-size:12.5px;color:var(--muted);margin-top:14px}
+
+  /* hosts */
+  .host{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--mist)}
+  .face{flex:none;width:84px;height:84px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:19px;overflow:hidden;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--teal)}
+  .face img{width:100%;height:100%;object-fit:cover}
+  .host .nm{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18.5px;line-height:1.2}
+  .host .rl{font-size:13px;font-weight:600;color:var(--orange);margin:2px 0 6px}
+  .host p{font-size:14.5px;color:#2B3357}
+  .champ{margin-top:16px;font-size:14px;color:var(--muted)}
+  .champ b{color:var(--ink)}
+
+  /* inputs */
+  textarea,input[type=text],input[type=email]{width:100%;border:1.5px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-size:16px;color:var(--ink);padding:13px 14px;outline:none;resize:none;transition:border-color .2s}
+  textarea{min-height:120px;line-height:1.5}
+  textarea:focus,input:focus{border-color:var(--blue)}
+  ::placeholder{color:#9AA2BB}
+  .opt{font-size:13px;font-weight:600;color:var(--muted);margin:18px 0 8px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px}
+
+  /* choices */
+  .choices{display:grid;gap:8px;margin:4px 0}
+  .choices.two{grid-template-columns:1fr 1fr}
+  .choice{display:flex;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:13px 14px;transition:all .15s;min-height:50px}
+  .choice .dot{flex:none;width:18px;height:18px;border:2px solid #A9B1CC;border-radius:50%;transition:all .15s;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+  .choices.multi .choice .dot{border-radius:5px}
+  .choice .t{font-size:15.5px;line-height:1.3}
+  .choice:hover{border-color:var(--blue)}
+  .choice.sel{border-color:var(--navy);background:#F1F3FA}
+  .choice.sel .dot{background:var(--orange);border-color:var(--orange)}
+  .choices.multi .choice.sel .dot:after{content:"\2713"}
+  .choice.dim{opacity:.45}
+  .pickcount{font-size:13px;font-weight:600;color:var(--muted);margin-top:8px;min-height:1em}
+  .group{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+
+  .private{display:flex;gap:10px;align-items:flex-start;background:var(--mist);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:12px 14px;font-size:13.5px;color:#2B3357;margin-bottom:20px}
+  .private span:first-child{color:var(--teal)}
+  .reveal{display:none;margin-top:16px}
+  .reveal.show{display:block;animation:rise .35s ease both}
+  .reveal .private{margin-bottom:0}
+
+  .need{display:none;margin-top:16px;font-size:14px;font-weight:600;color:var(--pink)}
+  .need.show{display:block;animation:rise .3s ease both}
+  .missing.choices .choice,input.missing{border-color:#EFA1B8}
+
+  /* nav */
+  .nav{position:fixed;bottom:0;left:0;right:0;z-index:5;background:linear-gradient(rgba(255,255,255,0),var(--paper) 35%);padding:26px 20px calc(18px + env(safe-area-inset-bottom))}
+  .nav-in{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .btn{background:var(--orange);color:#fff;padding:15px 30px;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;letter-spacing:.02em;transition:background .2s}
+  .btn:hover{background:#D9552E}
+  .btn[disabled]{opacity:.7;cursor:default}
+  .back{font-size:14px;font-weight:600;color:var(--muted);padding:10px 4px}
+  .back[hidden]{visibility:hidden;display:block}
+  .nav.hide{display:none}
+
+  /* end */
+  .end{background:var(--navy);color:#fff;text-align:center;padding-top:10vh}
+  .end:before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--stripe)}
+  .end.on{position:relative}
+  .end .logo{width:min(44vw,170px)}
+  .end h2{color:#fff;font-size:clamp(28px,7vw,38px)}
+  .end p.body{max-width:460px;margin:0 auto 14px;color:#D3D8EA}
+  .sig{font-family:'Montserrat',sans-serif;font-weight:700;font-size:18px;margin-top:26px;color:var(--gold)}
+  .join{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:22px auto 6px;max-width:460px}
+  .join .btn{text-decoration:none;display:inline-block}
+  .join .ghost{background:transparent;border:1.5px solid rgba(255,255,255,.4)}
+  .join .ghost:hover{background:rgba(255,255,255,.08)}
+  .join small{flex-basis:100%;font-size:13px;color:var(--gold);font-weight:600;margin-top:4px}
+  .err{color:var(--pink);font-size:14px;font-weight:600;margin-top:14px;display:none}
+
+  @media (max-width:380px){ .choices.two{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<div class="top hide" id="top"><div class="top-in">
+  <img src="img/eo25.jpg" alt="EO Barcelona 25 years">
+  <div class="bar"><i id="barfill"></i></div>
+  <span class="count" id="count"></span>
+</div></div>
+
+<form id="f" onsubmit="return false">
+
+<!-- 0 · WELCOME -->
+<section class="hero on" data-s="0">
+  <div class="glow"></div>
+  <div class="in"><div class="grid">
+  <div>
+    <img class="logo" src="img/eo25.jpg" alt="EO Barcelona, celebrating 25 years">
+    <div class="art-m"><svg class="art" viewBox="0 0 520 500" role="img" aria-label="Illustration: a globe with routes from Barcelona to other tax homes, passports, a tax form, coins and a family home">
+<defs>
+<radialGradient id="glbM" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#25329A"/><stop offset=".55" stop-color="#0F1A55"/><stop offset="1" stop-color="#070D33"/></radialGradient>
+<linearGradient id="gldM" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBD98C"/><stop offset=".6" stop-color="#EEB454"/><stop offset="1" stop-color="#D2913A"/></linearGradient>
+<linearGradient id="ppM" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A3264F"/><stop offset="1" stop-color="#6E1535"/></linearGradient>
+</defs>
+<circle class="spin" cx="260" cy="250" r="212" fill="none" stroke="#EEB454" stroke-opacity=".35" stroke-width="1.4" stroke-dasharray="2 9"/>
+<circle cx="260" cy="250" r="180" fill="none" stroke="#3D49C0" stroke-opacity=".35" stroke-width="1"/>
+<circle cx="260" cy="250" r="150" fill="url(#glbM)"/>
+<g fill="none" stroke="#fff" stroke-opacity=".13" stroke-width="1.2">
+<circle cx="260" cy="250" r="150"/><ellipse cx="260" cy="250" rx="105" ry="150"/><ellipse cx="260" cy="250" rx="52" ry="150"/>
+<path d="M260 100V400M110 250H410M130 175H390M130 325H390"/>
+</g>
+<g fill="none" stroke-width="2.2" stroke-linecap="round">
+<path class="route" d="M238 236Q208 205 186 244" stroke="#23A991"/>
+<path class="route" d="M238 236Q212 192 222 166" stroke="#EEB454"/>
+<path class="route" d="M238 236Q246 192 272 192" stroke="#E23A6E"/>
+<path class="route" d="M238 236Q266 202 292 222" stroke="#23A991"/>
+<path class="route" d="M238 236Q318 180 364 296" stroke="#F0693F"/>
+</g>
+<g font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="11" fill="#C9D0EC" letter-spacing="1">
+<circle cx="186" cy="244" r="4" fill="#23A991"/><text x="150" y="262">LIS</text>
+<circle cx="222" cy="166" r="4" fill="#EEB454"/><text x="190" y="160">LDN</text>
+<circle cx="272" cy="192" r="4" fill="#E23A6E"/><text x="280" y="186">ZRH</text>
+<circle cx="292" cy="222" r="4" fill="#23A991"/><text x="296" y="242">MIL</text>
+<circle cx="364" cy="296" r="4" fill="#F0693F"/><text x="352" y="318">DXB</text>
+<circle cx="238" cy="236" r="13" fill="#F0693F" fill-opacity=".22"/><circle cx="238" cy="236" r="6" fill="#F0693F"/>
+<text x="206" y="270" fill="#fff" font-size="12.5">BCN</text>
+</g>
+<g class="float1"><g transform="translate(356 26) rotate(8)">
+<rect width="132" height="166" rx="12" fill="#fff"/>
+<path d="M12 0H120A12 12 0 0 1 132 12V36H0V12A12 12 0 0 1 12 0Z" fill="#3D49C0"/>
+<text x="14" y="24" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="13" fill="#fff" letter-spacing="2">TAX</text>
+<text x="118" y="24" text-anchor="end" font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="11" fill="#C9D0EC">2027</text>
+<rect x="14" y="52" width="104" height="6" rx="3" fill="#D6DBE8"/><rect x="14" y="66" width="78" height="6" rx="3" fill="#D6DBE8"/><rect x="14" y="80" width="92" height="6" rx="3" fill="#D6DBE8"/>
+<text x="12" y="150" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="58" fill="#F0693F">%</text>
+<circle cx="100" cy="128" r="20" fill="none" stroke="#23A991" stroke-width="2.6"/>
+<path d="M91 128l6 6 12-13" fill="none" stroke="#23A991" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g></g>
+<g class="float3"><g transform="translate(66 64)">
+<circle cx="44" cy="44" r="46" fill="#23A991"/>
+<path d="M20 48L44 27L68 48V70H20Z" fill="#fff"/>
+<path d="M44 44c-3-6-12-4-11 3 1 5 11 11 11 11s10-6 11-11c1-7-8-9-11-3z" fill="#F0693F"/>
+</g></g>
+<g class="float2"><g transform="translate(46 318) rotate(-10)">
+<rect x="-18" y="10" width="104" height="138" rx="10" fill="#3D49C0" transform="rotate(-9)"/>
+<rect width="104" height="138" rx="10" fill="url(#ppM)"/>
+<rect x="6" y="6" width="92" height="126" rx="6" fill="none" stroke="#EEB454" stroke-opacity=".45"/>
+<g fill="none" stroke="#EEB454" stroke-width="2"><circle cx="52" cy="58" r="22"/><ellipse cx="52" cy="58" rx="10" ry="22"/><path d="M30 58H74"/></g>
+<text x="52" y="108" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="10" fill="#EEB454" letter-spacing="2.5">PASSPORT</text>
+</g></g>
+<g class="float1"><g transform="translate(388 352)">
+<g stroke="#B97A2A" stroke-width="1"><rect x="2" y="84" width="92" height="12" fill="#C98A2E"/><ellipse cx="48" cy="96" rx="46" ry="13" fill="#C98A2E"/><ellipse cx="48" cy="84" rx="46" ry="13" fill="url(#gldM)"/>
+<rect x="2" y="66" width="92" height="12" fill="#C98A2E"/><ellipse cx="48" cy="78" rx="46" ry="13" fill="#C98A2E"/><ellipse cx="48" cy="66" rx="46" ry="13" fill="url(#gldM)"/>
+<rect x="2" y="48" width="92" height="12" fill="#C98A2E"/><ellipse cx="48" cy="60" rx="46" ry="13" fill="#C98A2E"/><ellipse cx="48" cy="48" rx="46" ry="13" fill="url(#gldM)"/></g>
+<text x="48" y="53" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="15" fill="#8A5A17">€</text>
+</g></g>
+<g transform="translate(196 432)"><rect width="128" height="36" rx="18" fill="#fff" fill-opacity=".07" stroke="#fff" stroke-opacity=".2"/>
+<text x="64" y="23" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="12" fill="#EEB454" letter-spacing="2">STAY ⇄ GO</text></g>
+<g fill="#EEB454"><path d="M330 108h10M335 103v10" stroke="#EEB454" stroke-width="2" stroke-linecap="round"/><path d="M160 410h8M164 406v8" stroke="#23A991" stroke-width="2" stroke-linecap="round"/><circle cx="452" cy="230" r="3"/><circle cx="74" cy="250" r="2.5" fill="#E23A6E"/></g>
+</svg></div>
+    <div class="label">An exclusive Virtual Roundtable for EO Barcelona</div>
+    <h1>Tax, Wealth &amp; <span>Your Next Move</span></h1>
+    <div class="tagline">Your wealth. Your family. Your tax strategy.</div>
+    <div class="meta"><span>Thursday 19 November 2026</span><span>16:00 CET</span><span>Online · 90 min</span></div>
+    <p class="body">Is the way you manage your wealth aligned with the life you want for yourself and your family? Join Christophe Suchy and Gail Warrior, entrepreneurs, YPO members and co-founders of Global Citizen Consulting, for a candid, 90-minute virtual roundtable exclusively for EO Barcelona members. As tax and residency rules change across Europe and beyond, we'll explore the trade-offs of staying or relocating, how you own your business and wealth, and what you pass on to the next generation. Shaped by your anonymous questions, this confidential, unrecorded conversation draws on real stories and peer experience, so you leave clearer about your options and the decisions that affect your wealth, your family and your future.</p>
+    <div class="confirm">
+      <b>Complete this survey to receive your call link</b>
+      <p>The roundtable is limited to 25 members, registered through the EO Barcelona event page. Once you have your place, complete this survey: the call link appears as soon as you finish.</p>
+      <small>Please complete by Wednesday 11 November · 13 questions · about 4 minutes</small>
+    </div>
+    <div class="anon">
+      <b>This is an anonymous survey</b>
+      <p>We don't ask for your name or email, so your answers can never be traced back to you. They will only be used to customize this session.</p>
+    </div>
+    <button type="button" class="btn" onclick="go(1)">Begin</button>
+  </div>
+  <div class="art-d"><svg class="art" viewBox="0 0 520 500" role="img" aria-label="Illustration: a globe with routes from Barcelona to other tax homes, passports, a tax form, coins and a family home">
+<defs>
+<radialGradient id="glbD" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#25329A"/><stop offset=".55" stop-color="#0F1A55"/><stop offset="1" stop-color="#070D33"/></radialGradient>
+<linearGradient id="gldD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBD98C"/><stop offset=".6" stop-color="#EEB454"/><stop offset="1" stop-color="#D2913A"/></linearGradient>
+<linearGradient id="ppD" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A3264F"/><stop offset="1" stop-color="#6E1535"/></linearGradient>
+</defs>
+<circle class="spin" cx="260" cy="250" r="212" fill="none" stroke="#EEB454" stroke-opacity=".35" stroke-width="1.4" stroke-dasharray="2 9"/>
+<circle cx="260" cy="250" r="180" fill="none" stroke="#3D49C0" stroke-opacity=".35" stroke-width="1"/>
+<circle cx="260" cy="250" r="150" fill="url(#glbD)"/>
+<g fill="none" stroke="#fff" stroke-opacity=".13" stroke-width="1.2">
+<circle cx="260" cy="250" r="150"/><ellipse cx="260" cy="250" rx="105" ry="150"/><ellipse cx="260" cy="250" rx="52" ry="150"/>
+<path d="M260 100V400M110 250H410M130 175H390M130 325H390"/>
+</g>
+<g fill="none" stroke-width="2.2" stroke-linecap="round">
+<path class="route" d="M238 236Q208 205 186 244" stroke="#23A991"/>
+<path class="route" d="M238 236Q212 192 222 166" stroke="#EEB454"/>
+<path class="route" d="M238 236Q246 192 272 192" stroke="#E23A6E"/>
+<path class="route" d="M238 236Q266 202 292 222" stroke="#23A991"/>
+<path class="route" d="M238 236Q318 180 364 296" stroke="#F0693F"/>
+</g>
+<g font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="11" fill="#C9D0EC" letter-spacing="1">
+<circle cx="186" cy="244" r="4" fill="#23A991"/><text x="150" y="262">LIS</text>
+<circle cx="222" cy="166" r="4" fill="#EEB454"/><text x="190" y="160">LDN</text>
+<circle cx="272" cy="192" r="4" fill="#E23A6E"/><text x="280" y="186">ZRH</text>
+<circle cx="292" cy="222" r="4" fill="#23A991"/><text x="296" y="242">MIL</text>
+<circle cx="364" cy="296" r="4" fill="#F0693F"/><text x="352" y="318">DXB</text>
+<circle cx="238" cy="236" r="13" fill="#F0693F" fill-opacity=".22"/><circle cx="238" cy="236" r="6" fill="#F0693F"/>
+<text x="206" y="270" fill="#fff" font-size="12.5">BCN</text>
+</g>
+<g class="float1"><g transform="translate(356 26) rotate(8)">
+<rect width="132" height="166" rx="12" fill="#fff"/>
+<path d="M12 0H120A12 12 0 0 1 132 12V36H0V12A12 12 0 0 1 12 0Z" fill="#3D49C0"/>
+<text x="14" y="24" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="13" fill="#fff" letter-spacing="2">TAX</text>
+<text x="118" y="24" text-anchor="end" font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="11" fill="#C9D0EC">2027</text>
+<rect x="14" y="52" width="104" height="6" rx="3" fill="#D6DBE8"/><rect x="14" y="66" width="78" height="6" rx="3" fill="#D6DBE8"/><rect x="14" y="80" width="92" height="6" rx="3" fill="#D6DBE8"/>
+<text x="12" y="150" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="58" fill="#F0693F">%</text>
+<circle cx="100" cy="128" r="20" fill="none" stroke="#23A991" stroke-width="2.6"/>
+<path d="M91 128l6 6 12-13" fill="none" stroke="#23A991" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</g></g>
+<g class="float3"><g transform="translate(66 64)">
+<circle cx="44" cy="44" r="46" fill="#23A991"/>
+<path d="M20 48L44 27L68 48V70H20Z" fill="#fff"/>
+<path d="M44 44c-3-6-12-4-11 3 1 5 11 11 11 11s10-6 11-11c1-7-8-9-11-3z" fill="#F0693F"/>
+</g></g>
+<g class="float2"><g transform="translate(46 318) rotate(-10)">
+<rect x="-18" y="10" width="104" height="138" rx="10" fill="#3D49C0" transform="rotate(-9)"/>
+<rect width="104" height="138" rx="10" fill="url(#ppD)"/>
+<rect x="6" y="6" width="92" height="126" rx="6" fill="none" stroke="#EEB454" stroke-opacity=".45"/>
+<g fill="none" stroke="#EEB454" stroke-width="2"><circle cx="52" cy="58" r="22"/><ellipse cx="52" cy="58" rx="10" ry="22"/><path d="M30 58H74"/></g>
+<text x="52" y="108" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="10" fill="#EEB454" letter-spacing="2.5">PASSPORT</text>
+</g></g>
+<g class="float1"><g transform="translate(388 352)">
+<g stroke="#B97A2A" stroke-width="1"><rect x="2" y="84" width="92" height="12" fill="#C98A2E"/><ellipse cx="48" cy="96" rx="46" ry="13" fill="#C98A2E"/><ellipse cx="48" cy="84" rx="46" ry="13" fill="url(#gldD)"/>
+<rect x="2" y="66" width="92" height="12" fill="#C98A2E"/><ellipse cx="48" cy="78" rx="46" ry="13" fill="#C98A2E"/><ellipse cx="48" cy="66" rx="46" ry="13" fill="url(#gldD)"/>
+<rect x="2" y="48" width="92" height="12" fill="#C98A2E"/><ellipse cx="48" cy="60" rx="46" ry="13" fill="#C98A2E"/><ellipse cx="48" cy="48" rx="46" ry="13" fill="url(#gldD)"/></g>
+<text x="48" y="53" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="15" fill="#8A5A17">€</text>
+</g></g>
+<g transform="translate(196 432)"><rect width="128" height="36" rx="18" fill="#fff" fill-opacity=".07" stroke="#fff" stroke-opacity=".2"/>
+<text x="64" y="23" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="12" fill="#EEB454" letter-spacing="2">STAY ⇄ GO</text></g>
+<g fill="#EEB454"><path d="M330 108h10M335 103v10" stroke="#EEB454" stroke-width="2" stroke-linecap="round"/><path d="M160 410h8M164 406v8" stroke="#23A991" stroke-width="2" stroke-linecap="round"/><circle cx="452" cy="230" r="3"/><circle cx="74" cy="250" r="2.5" fill="#E23A6E"/></g>
+</svg>
+    <div class="themes"><span><i>01</i>Stay or go</span><span><i>02</i>Structure</span><span><i>03</i>Succession</span></div>
+  </div>
+  </div></div>
+</section>
+
+<!-- 1 · THE SESSION -->
+<section class="screen" data-s="1"><div class="wrap">
+  <div class="label">The session</div>
+  <h2>An honest conversation among peers, in the spirit of Forum</h2>
+  <p class="hint">No lecture and no pitch. No recording and no AI note-takers. Nothing leaves the room.</p>
+  <div class="card"><h3>Who it is for</h3>
+    <p>EO Barcelona members who live, work or invest across borders, or who are thinking about where they will live, how they own their business and what they will pass on.</p></div>
+  <div class="card"><h3>The objective</h3>
+    <p>Understand your options as tax and residency rules change across Europe, hear how your peers are handling the same decisions, and leave clearer on what matters for your wealth, your family and your future.</p></div>
+  <div class="card"><h3>Three conversations, chosen from your answers</h3>
+    <div class="dilemmas">
+      <div><b>1</b>Stay or go?</div>
+      <div><b>2</b>Is your structure still fit for 2026?</div>
+      <div><b>3</b>Who gets it, and who decides?</div>
+    </div></div>
+  <p class="fine">Education and experience sharing only. Nothing in the session is advice.</p>
+</div></section>
+
+<!-- 2 · GUESTS -->
+<section class="screen" data-s="2"><div class="wrap">
+  <div class="label">Our guests</div>
+  <h2>Christophe Suchy and Gail Warrior</h2>
+  <p class="hint">Co-founders of Global Citizen Consulting, members of YPO and CEO, and co-authors of <i>The Global Freedom Blueprint</i>. They made their own move in 2020, and they will open with that story.</p>
+  <div class="host">
+    <div class="face" id="face-cs"><img src="img/christophe-suchy.jpg" alt="Christophe Suchy"></div>
+    <div><div class="nm">Christophe Suchy</div><div class="rl">Co-founder, Global Citizen Consulting</div>
+      <p>Scientist, serial founder, advisor and board member. He has lived in Spain for 23 years and works between Europe and the United States, helping founders, executives and families design their international footprint: tax residency, second residencies, holding structures and family offices. He is also President of ReSPR Technologies, and a former professional volleyball player.</p></div>
+  </div>
+  <div class="host">
+    <div class="face" id="face-gw"><img src="img/gail-warrior.jpg" alt="Gail Warrior"></div>
+    <div><div class="nm">Gail Warrior</div><div class="rl">Co-founder, Global Citizen Consulting</div>
+      <p>A former Mobil Oil accountant, she founded Warrior Group in Texas and grew it from a $31K first year into a $124M modular construction company, then led CASPR Group until her exit in 2023. A certified executive life coach, she advises growth-stage founders on strategy and fundraising.</p></div>
+  </div>
+  <p class="champ">Event Champion: <b>Zineb El Ouazzani</b>, EO Barcelona</p>
+</div></section>
+
+<!-- 3 · Q1 -->
+<section class="screen" data-s="3"><div class="wrap">
+  <div class="group">About you</div>
+  <div class="private"><span>◆</span><span>Your answers are anonymous. They are kept apart from your name and are seen only by the hosts and the chapter, to shape the session.</span></div>
+  <h2>Where are you tax resident today?</h2>
+  <div class="choices two" data-name="residence" data-max="1" data-req>
+    <button type="button" class="choice" data-v="Spain"><span class="dot"></span><span class="t">Spain</span></button>
+    <button type="button" class="choice" data-v="France"><span class="dot"></span><span class="t">France</span></button>
+    <button type="button" class="choice" data-v="Germany"><span class="dot"></span><span class="t">Germany</span></button>
+    <button type="button" class="choice" data-v="Italy"><span class="dot"></span><span class="t">Italy</span></button>
+    <button type="button" class="choice" data-v="Portugal"><span class="dot"></span><span class="t">Portugal</span></button>
+    <button type="button" class="choice" data-v="Netherlands or Belgium"><span class="dot"></span><span class="t">Netherlands or Belgium</span></button>
+    <button type="button" class="choice" data-v="Another EU country"><span class="dot"></span><span class="t">Another EU country</span></button>
+    <button type="button" class="choice" data-v="Switzerland"><span class="dot"></span><span class="t">Switzerland</span></button>
+    <button type="button" class="choice" data-v="UK"><span class="dot"></span><span class="t">UK</span></button>
+    <button type="button" class="choice" data-v="Monaco or Andorra"><span class="dot"></span><span class="t">Monaco or Andorra</span></button>
+    <button type="button" class="choice" data-v="UAE"><span class="dot"></span><span class="t">UAE</span></button>
+    <button type="button" class="choice" data-v="Other"><span class="dot"></span><span class="t">Other</span></button>
+    <button type="button" class="choice" data-v="Not sure"><span class="dot"></span><span class="t">Not sure</span></button>
+  </div>
+  <div class="opt">Other or another EU country? Tell us which (optional)</div>
+  <input type="text" name="residence_other" placeholder="Country" autocomplete="off">
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 4 · Q2 -->
+<section class="screen" data-s="4"><div class="wrap">
+  <div class="group">About you</div>
+  <h2>How many passports does your immediate family hold between you?</h2>
+  <div class="choices two" data-name="passports" data-max="1" data-req>
+    <button type="button" class="choice" data-v="1"><span class="dot"></span><span class="t">1</span></button>
+    <button type="button" class="choice" data-v="2"><span class="dot"></span><span class="t">2</span></button>
+    <button type="button" class="choice" data-v="3"><span class="dot"></span><span class="t">3</span></button>
+    <button type="button" class="choice" data-v="4+"><span class="dot"></span><span class="t">4 or more</span></button>
+  </div>
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 5 · Q3 -->
+<section class="screen" data-s="5"><div class="wrap">
+  <div class="group">About you</div>
+  <h2>In how many countries do you, your partner or your children spend more than 30 days a year?</h2>
+  <div class="choices two" data-name="countries" data-max="1" data-req>
+    <button type="button" class="choice" data-v="1"><span class="dot"></span><span class="t">1</span></button>
+    <button type="button" class="choice" data-v="2"><span class="dot"></span><span class="t">2</span></button>
+    <button type="button" class="choice" data-v="3"><span class="dot"></span><span class="t">3</span></button>
+    <button type="button" class="choice" data-v="4+"><span class="dot"></span><span class="t">4 or more</span></button>
+  </div>
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 6 · Q4 -->
+<section class="screen" data-s="6"><div class="wrap">
+  <div class="group">About you</div>
+  <h2>Has any family member ever been a US citizen, green card holder or US resident?</h2>
+  <div class="choices" data-name="us_ties" data-max="1" data-req>
+    <button type="button" class="choice" data-v="Yes"><span class="dot"></span><span class="t">Yes</span></button>
+    <button type="button" class="choice" data-v="No"><span class="dot"></span><span class="t">No</span></button>
+    <button type="button" class="choice" data-v="Prefer not to say"><span class="dot"></span><span class="t">Prefer not to say</span></button>
+  </div>
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 7 · Q5 -->
+<section class="screen" data-s="7"><div class="wrap">
+  <div class="group">Your business and wealth</div>
+  <h2>How do you own your main business?</h2>
+  <div class="choices" data-name="ownership" data-max="1" data-req>
+    <button type="button" class="choice" data-v="Personally"><span class="dot"></span><span class="t">Personally</span></button>
+    <button type="button" class="choice" data-v="Through a holding company"><span class="dot"></span><span class="t">Through a holding company</span></button>
+    <button type="button" class="choice" data-v="Several companies in different countries"><span class="dot"></span><span class="t">Through several companies in different countries</span></button>
+    <button type="button" class="choice" data-v="Other"><span class="dot"></span><span class="t">Other</span></button>
+  </div>
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 8 · Q6 -->
+<section class="screen" data-s="8"><div class="wrap">
+  <div class="group">Your business and wealth</div>
+  <h2>Roughly, what is your total net worth, including the business?</h2>
+  <div class="choices" data-name="net_worth" data-max="1" data-req>
+    <button type="button" class="choice" data-v="Under 2M"><span class="dot"></span><span class="t">Under €2M</span></button>
+    <button type="button" class="choice" data-v="2-10M"><span class="dot"></span><span class="t">€2M to €10M</span></button>
+    <button type="button" class="choice" data-v="10-30M"><span class="dot"></span><span class="t">€10M to €30M</span></button>
+    <button type="button" class="choice" data-v="30M+"><span class="dot"></span><span class="t">Over €30M</span></button>
+    <button type="button" class="choice" data-v="Prefer not to say"><span class="dot"></span><span class="t">Prefer not to say</span></button>
+  </div>
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 9 · Q7 -->
+<section class="screen" data-s="9"><div class="wrap">
+  <div class="group">Your business and wealth</div>
+  <h2>Which events do you expect in the next 5 years?</h2>
+  <p class="hint">Tick all that apply.</p>
+  <div class="choices multi" data-name="events" data-max="8" data-min="1" data-req>
+    <button type="button" class="choice" data-v="Sale of the business"><span class="dot"></span><span class="t">Sale of the business</span></button>
+    <button type="button" class="choice" data-v="Big dividend or fundraise"><span class="dot"></span><span class="t">A big dividend or fundraise</span></button>
+    <button type="button" class="choice" data-v="Moving country"><span class="dot"></span><span class="t">Moving country</span></button>
+    <button type="button" class="choice" data-v="Starting a family"><span class="dot"></span><span class="t">Starting a family</span></button>
+    <button type="button" class="choice" data-v="A child's first years in school"><span class="dot"></span><span class="t">A child's first years in school</span></button>
+    <button type="button" class="choice" data-v="A child studying abroad"><span class="dot"></span><span class="t">A child going abroad to study</span></button>
+    <button type="button" class="choice" data-v="Inheritance received or planned"><span class="dot"></span><span class="t">An inheritance, received or planned</span></button>
+    <button type="button" class="choice" data-v="None" data-solo><span class="dot"></span><span class="t">None of these</span></button>
+  </div>
+  <div class="need">Please choose at least one to continue.</div>
+</div></section>
+
+<!-- 10 · Q8 -->
+<section class="screen" data-s="10"><div class="wrap">
+  <div class="group">What's on your mind</div>
+  <h2>Which worries you most?</h2>
+  <p class="hint">Choose your top 3, in order. Your first tap is your biggest worry.</p>
+  <div class="choices rank" data-name="worries" data-max="3" data-min="3" data-req>
+    <button type="button" class="choice" data-v="Wealth tax"><span class="dot"></span><span class="t">Wealth tax</span></button>
+    <button type="button" class="choice" data-v="Exit tax if I leave"><span class="dot"></span><span class="t">Exit tax if I leave my country</span></button>
+    <button type="button" class="choice" data-v="Tax on a sale"><span class="dot"></span><span class="t">Tax on a sale</span></button>
+    <button type="button" class="choice" data-v="Inheritance between countries"><span class="dot"></span><span class="t">Inheritance between countries</span></button>
+    <button type="button" class="choice" data-v="Asset protection (lawsuits, divorce)"><span class="dot"></span><span class="t">Protecting assets from lawsuits or divorce</span></button>
+    <button type="button" class="choice" data-v="Political or currency risk"><span class="dot"></span><span class="t">Political or currency risk</span></button>
+    <button type="button" class="choice" data-v="Having a Plan B country"><span class="dot"></span><span class="t">Having a Plan B country</span></button>
+  </div>
+  <div class="pickcount" data-for="worries"></div>
+  <div class="need">Please choose three to continue.</div>
+</div></section>
+
+<!-- 11 · Q9 -->
+<section class="screen" data-s="11"><div class="wrap">
+  <div class="group">What's on your mind</div>
+  <h2>If you could move your tax residency tomorrow with no hassle, where would you go?</h2>
+  <p class="hint">Optional.</p>
+  <input type="text" name="dream_residence" placeholder="A country, a city, or 'I'd stay'" autocomplete="off">
+</div></section>
+
+<!-- 12 · Q10 -->
+<section class="screen" data-s="12"><div class="wrap">
+  <div class="group">What's on your mind</div>
+  <h2>Have you already done any structuring?</h2>
+  <p class="hint">For example a holding company, a trust or foundation, a second residency, or a special regime for new residents such as Spain's Beckham law, Italy's flat tax or Portugal's IFICI.</p>
+  <div class="choices" data-name="structuring" data-max="1" data-req>
+    <button type="button" class="choice" data-v="Yes, and it works"><span class="dot"></span><span class="t">Yes, and it works</span></button>
+    <button type="button" class="choice" data-v="Yes, but unsure it still works"><span class="dot"></span><span class="t">Yes, but I'm unsure it still works</span></button>
+    <button type="button" class="choice" data-v="No"><span class="dot"></span><span class="t">No</span></button>
+    <button type="button" class="choice" data-v="Don't know"><span class="dot"></span><span class="t">I don't know</span></button>
+  </div>
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 13 · Q11 -->
+<section class="screen" data-s="13"><div class="wrap">
+  <div class="group">What's on your mind</div>
+  <h2>What is the one question you would ask a tax expert if nobody was listening?</h2>
+  <p class="hint">Optional, and the most useful answer on this form.</p>
+  <textarea name="one_question" placeholder="My question is…"></textarea>
+</div></section>
+
+<!-- 14 · Q12 -->
+<section class="screen" data-s="14"><div class="wrap">
+  <div class="group">The session</div>
+  <h2>Which do you prefer for the session?</h2>
+  <div class="choices" data-name="format_pref" data-max="1" data-req>
+    <button type="button" class="choice" data-v="More peer discussion"><span class="dot"></span><span class="t">More peer discussion</span></button>
+    <button type="button" class="choice" data-v="More expert input"><span class="dot"></span><span class="t">More expert input</span></button>
+    <button type="button" class="choice" data-v="Both equally"><span class="dot"></span><span class="t">Both equally</span></button>
+  </div>
+  <div class="need">Please choose one to continue.</div>
+</div></section>
+
+<!-- 15 · Q13 -->
+<section class="screen" data-s="15"><div class="wrap">
+  <div class="group">The session</div>
+  <h2>Would you be willing to share your own experience on one of these topics during the session?</h2>
+  <div class="choices" data-name="share" data-max="1" data-req>
+    <button type="button" class="choice" data-v="Yes"><span class="dot"></span><span class="t">Yes</span></button>
+    <button type="button" class="choice" data-v="Maybe"><span class="dot"></span><span class="t">Maybe</span></button>
+    <button type="button" class="choice" data-v="No"><span class="dot"></span><span class="t">No</span></button>
+  </div>
+  <div class="reveal" id="share-note"><div class="private"><span>◆</span><span>Thank you. Your answers stay anonymous, so we won't know it was you. Just let Zineb know directly that you're open to it, and she will follow up with you privately.</span></div></div>
+  <div class="need">Please choose one to continue.</div>
+  <div class="err" id="err">Something interrupted the sending. Please try again in a moment.</div>
+</div></section>
+
+<!-- 16 · THANK YOU -->
+<section class="screen end" data-s="16"><div class="wrap">
+  <img class="logo" src="img/eo25.jpg" alt="EO Barcelona, celebrating 25 years">
+  <div class="label">Thank you for your answers</div>
+  <h2>Thank you. You're in.</h2>
+  <p class="body">Your answers will shape the conversation on <b style="color:#fff">Thursday 19 November at 16:00 CET</b>. Here is everything you need to join.</p>
+  <div class="join">
+    <a class="btn" id="joinbtn" target="_blank" rel="noopener">Join the call</a>
+    <a class="btn ghost" id="calbtn" download="tax-wealth-your-next-move.ics">Add to my calendar</a>
+    <small id="joinnote">Save this page or add it to your calendar: the link is only shown here.</small>
+  </div>
+  <p class="body">Bring your experience and your toughest question.</p>
+  <div class="sig">See you there</div>
+</div></section>
+
+</form>
+
+<div class="nav hide" id="nav"><div class="nav-in">
+  <button type="button" class="back" id="back" onclick="go(cur-1)">← Back</button>
+  <button type="button" class="btn" id="next" onclick="next()">Continue</button>
+</div></div>
+
+<script>
+/* Where answers go. Empty = preview mode: nothing leaves the page. */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbzNv17laQ19vUrIZRSRd9I9jj67ewkoQ3RLa7yGIsvpjLZSJ0XUsNdZwYGBggOWYFj-bw/exec";
+/* The call link shown on the thank-you page. Add the Zoom link before publishing. */
+const CALL_LINK = "";
+const FIRST_Q = 3, LAST_Q = 15, END = 16, NQ = LAST_Q - FIRST_Q + 1;
+let cur = 0;
+const data = {};
+
+document.querySelectorAll('.choices').forEach(ch => {
+  const max = +ch.dataset.max, name = ch.dataset.name, rank = ch.classList.contains('rank');
+  const btns = [...ch.querySelectorAll('.choice')];
+  let order = [];
+  const sync = () => {
+    if (rank) {
+      btns.forEach(b => { const i = order.indexOf(b); b.classList.toggle('sel', i > -1); b.querySelector('.dot').textContent = i > -1 ? i + 1 : ''; });
+      data[name] = order.map(b => b.dataset.v);
+    } else {
+      const picked = btns.filter(b => b.classList.contains('sel'));
+      if (max === 1) { if (picked[0]) data[name] = picked[0].dataset.v; else delete data[name]; }
+      else data[name] = picked.map(b => b.dataset.v);
+    }
+    const n = rank ? order.length : btns.filter(b => b.classList.contains('sel')).length;
+    if (rank) btns.forEach(b => b.classList.toggle('dim', n >= max && !b.classList.contains('sel')));
+    const pc = document.querySelector(`.pickcount[data-for="${name}"]`);
+    if (pc) pc.textContent = n ? `${n} of ${max} chosen` : '';
+    if (name === 'share') document.getElementById('share-note').classList.toggle('show', data.share === 'Yes' || data.share === 'Maybe');
+    clearNeed();
+  };
+  btns.forEach(b => b.onclick = () => {
+    if (rank) {
+      const i = order.indexOf(b);
+      if (i > -1) order.splice(i, 1); else if (order.length < max) order.push(b);
+    } else if (max === 1) { btns.forEach(x => x.classList.remove('sel')); b.classList.add('sel'); }
+    else {
+      const on = !b.classList.contains('sel');
+      if (on && b.hasAttribute('data-solo')) btns.forEach(x => x.classList.remove('sel'));
+      if (on && !b.hasAttribute('data-solo')) btns.filter(x => x.hasAttribute('data-solo')).forEach(x => x.classList.remove('sel'));
+      b.classList.toggle('sel', on);
+    }
+    sync();
+  });
+});
+document.addEventListener('input', clearNeed);
+
+function missingOn(n){
+  const s = document.querySelector(`[data-s="${n}"]`); const miss = [];
+  s.querySelectorAll('[data-req]').forEach(el => {
+    if (el.classList.contains('choices')) {
+      const v = data[el.dataset.name], max = +el.dataset.max, min = +(el.dataset.min || max);
+      const ok = max === 1 ? !!v : (Array.isArray(v) && v.length >= min && v.length <= max);
+      if (!ok) miss.push(el);
+    } else {
+      const v = el.value.trim();
+      if (!v || (el.hasAttribute('data-email') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))) miss.push(el);
+    }
+  });
+  return miss;
+}
+function clearNeed(){
+  document.querySelectorAll('.need.show').forEach(x => x.classList.remove('show'));
+  document.querySelectorAll('.missing').forEach(x => x.classList.remove('missing'));
+}
+function showNeed(n, miss){
+  const s = document.querySelector(`[data-s="${n}"]`);
+  miss.forEach(m => m.classList.add('missing'));
+  const need = s.querySelector('.need'); if (need) need.classList.add('show');
+  miss[0].scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function go(n){
+  if (n < 0 || n > END) return;
+  clearNeed();
+  document.querySelectorAll('[data-s]').forEach(s => s.classList.remove('on'));
+  document.querySelector(`[data-s="${n}"]`).classList.add('on');
+  cur = n;
+  const inFlow = n >= 1 && n <= LAST_Q, inQ = n >= FIRST_Q && n <= LAST_Q;
+  document.getElementById('top').classList.toggle('hide', !inFlow);
+  document.getElementById('nav').classList.toggle('hide', !inFlow);
+  document.getElementById('back').hidden = n <= 1;
+  document.getElementById('next').textContent = n === LAST_Q ? 'Submit and confirm my place' : (n === FIRST_Q - 1 ? 'Start the survey' : 'Continue');
+  const q = inQ ? n - FIRST_Q + 1 : 0;
+  document.getElementById('barfill').style.width = (q / NQ * 100) + '%';
+  document.getElementById('count').textContent = inQ ? `${q} / ${NQ}` : '';
+  window.scrollTo(0, 0);
+}
+function next(){
+  const miss = missingOn(cur);
+  if (miss.length) { showNeed(cur, miss); return; }
+  cur === LAST_Q ? send() : go(cur + 1);
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && e.target.tagName === 'INPUT' && cur >= 1 && cur <= LAST_Q) { e.preventDefault(); next(); }
+});
+if (/^#\d+$/.test(location.hash)) go(+location.hash.slice(1));
+
+async function send(){
+  const answers = { date: new Date().toISOString().slice(0, 10) };
+  for (const [k, v] of Object.entries(data)) answers[k] = v;
+  ['residence_other','dream_residence','one_question'].forEach(n => { const el = document.querySelector(`[name="${n}"]`); if (el && el.value.trim()) answers[n] = el.value.trim(); });
+  if (Array.isArray(answers.worries)) answers.worries = answers.worries.map((w, i) => `${i + 1}. ${w}`);
+  const btn = document.getElementById('next'); btn.textContent = 'Sending…'; btn.disabled = true;
+  try {
+    if (ENDPOINT) await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ answers }) });
+    else console.log('Preview mode, not sent:', JSON.stringify({ answers }));
+    go(END);
+  } catch (e) {
+    document.getElementById('err').style.display = 'block';
+    btn.textContent = 'Submit and confirm my place'; btn.disabled = false;
+  }
+}
+
+/* Thank-you page: call link + calendar file (19 Nov 2026, 16:00 to 17:30 CET = 15:00 to 16:30 UTC) */
+(function(){
+  const join = document.getElementById('joinbtn');
+  if (CALL_LINK) join.href = CALL_LINK;
+  else { join.removeAttribute('href'); join.textContent = 'Call link coming soon'; join.style.opacity = '.6'; join.style.cursor = 'default'; }
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//EO Barcelona//Roundtable//EN','BEGIN:VEVENT',
+    'UID:tax-wealth-next-move-20261119@eobarcelona','DTSTAMP:20261019T000000Z',
+    'DTSTART:20261119T150000Z','DTEND:20261119T163000Z',
+    'SUMMARY:Tax\\, Wealth & Your Next Move (EO Barcelona)',
+    'DESCRIPTION:An exclusive Virtual Roundtable for EO Barcelona with Christophe Suchy and Gail Warrior.' + (CALL_LINK ? '\\nJoin: ' + CALL_LINK : ''),
+    'LOCATION:' + (CALL_LINK || 'Online'),'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  document.getElementById('calbtn').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+})();
+</script>
+</body>
+</html>
