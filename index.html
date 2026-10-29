@@ -272,13 +272,13 @@
     <div class="meta"><span>Thursday 19 November 2026</span><span>16:00 CET</span><span>Online · 90 min</span></div>
     <p class="body">Is the way you manage your wealth aligned with the life you want for yourself and your family? Join Christophe Suchy and Gail Warrior, entrepreneurs, YPO members and co-founders of Global Citizen Consulting, for a candid, 90-minute virtual roundtable exclusively for EO Barcelona members. As tax and residency rules change across Europe and beyond, we'll explore the trade-offs of staying or relocating, how you own your business and wealth, and what you pass on to the next generation. Shaped by your anonymous questions, this confidential, unrecorded conversation draws on real stories and peer experience, so you leave clearer about your options and the decisions that affect your wealth, your family and your future.</p>
     <div class="confirm">
-      <b>Complete this survey to receive your call link</b>
-      <p>The roundtable is limited to 25 members, registered through the EO Barcelona event page. Once you have your place, complete this survey: the call link appears as soon as you finish.</p>
+      <b>Complete this survey to confirm your place</b>
+      <p>The roundtable is limited to 25 members, registered through the EO Barcelona event page. Completing this survey is required to attend: it confirms your place, and we will email you the call link closer to the date.</p>
       <small>Please complete by Wednesday 11 November · 13 questions · about 4 minutes</small>
     </div>
     <div class="anon">
-      <b>This is an anonymous survey</b>
-      <p>We don't ask for your name or email, so your answers can never be traced back to you. They will only be used to customize this session.</p>
+      <b>Your answers stay anonymous</b>
+      <p>We ask for your name for one reason only: to check that you completed the survey, since it is required to join the session. Your name is stored separately from your answers, so they can never be traced back to you. Your answers are only used to shape this session.</p>
     </div>
     <button type="button" class="btn" onclick="go(1)">Begin</button>
   </div>
@@ -384,10 +384,23 @@
   <p class="champ">Event Champion: <b>Zineb El Ouazzani</b>, EO Barcelona</p>
 </div></section>
 
-<!-- 3 · Q1 -->
+<!-- 3 · NAME (attendance check only, stored apart from the answers) -->
 <section class="screen" data-s="3"><div class="wrap">
+  <div class="label">Confirm your place</div>
+  <h2>What is your name?</h2>
+  <p class="hint">Completing this survey is required to attend the roundtable. We only use your name to check that you have completed it, so we can send you the call link closer to the date.</p>
+  <div class="field">
+    <label for="full_name">First and last name (required)</label>
+    <input type="text" id="full_name" name="full_name" placeholder="First and last name" autocomplete="name" data-req>
+  </div>
+  <div class="private"><span>◆</span><span>Your name is saved on a separate list from your answers. Nobody, including the hosts and the chapter, can link your name to what you answer next.</span></div>
+  <div class="need">Please add your name to continue.</div>
+</div></section>
+
+<!-- 4 · Q1 -->
+<section class="screen" data-s="4"><div class="wrap">
   <div class="group">About you</div>
-  <div class="private"><span>◆</span><span>Your answers are anonymous. They are kept apart from your name and are seen only by the hosts and the chapter, to shape the session.</span></div>
+  <div class="private"><span>◆</span><span>From here on, your answers are anonymous. They are kept apart from your name and are seen only by the hosts and the chapter, to shape the session.</span></div>
   <h2>Where are you tax resident today?</h2>
   <div class="choices two" data-name="residence" data-max="1" data-req>
     <button type="button" class="choice" data-v="Spain"><span class="dot"></span><span class="t">Spain</span></button>
@@ -409,8 +422,8 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 4 · Q2 -->
-<section class="screen" data-s="4"><div class="wrap">
+<!-- 5 · Q2 -->
+<section class="screen" data-s="5"><div class="wrap">
   <div class="group">About you</div>
   <h2>How many passports does your immediate family hold between you?</h2>
   <div class="choices two" data-name="passports" data-max="1" data-req>
@@ -422,8 +435,8 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 5 · Q3 -->
-<section class="screen" data-s="5"><div class="wrap">
+<!-- 6 · Q3 -->
+<section class="screen" data-s="6"><div class="wrap">
   <div class="group">About you</div>
   <h2>In how many countries do you, your partner or your children spend more than 30 days a year?</h2>
   <div class="choices two" data-name="countries" data-max="1" data-req>
@@ -435,8 +448,8 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 6 · Q4 -->
-<section class="screen" data-s="6"><div class="wrap">
+<!-- 7 · Q4 -->
+<section class="screen" data-s="7"><div class="wrap">
   <div class="group">About you</div>
   <h2>Has any family member ever been a US citizen, green card holder or US resident?</h2>
   <div class="choices" data-name="us_ties" data-max="1" data-req>
@@ -447,8 +460,8 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 7 · Q5 -->
-<section class="screen" data-s="7"><div class="wrap">
+<!-- 8 · Q5 -->
+<section class="screen" data-s="8"><div class="wrap">
   <div class="group">Your business and wealth</div>
   <h2>How do you own your main business?</h2>
   <div class="choices" data-name="ownership" data-max="1" data-req>
@@ -460,8 +473,8 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 8 · Q6 -->
-<section class="screen" data-s="8"><div class="wrap">
+<!-- 9 · Q6 -->
+<section class="screen" data-s="9"><div class="wrap">
   <div class="group">Your business and wealth</div>
   <h2>Roughly, what is your total net worth, including the business?</h2>
   <div class="choices" data-name="net_worth" data-max="1" data-req>
@@ -474,8 +487,8 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 9 · Q7 -->
-<section class="screen" data-s="9"><div class="wrap">
+<!-- 10 · Q7 -->
+<section class="screen" data-s="10"><div class="wrap">
   <div class="group">Your business and wealth</div>
   <h2>Which events do you expect in the next 5 years?</h2>
   <p class="hint">Tick all that apply.</p>
@@ -492,8 +505,8 @@
   <div class="need">Please choose at least one to continue.</div>
 </div></section>
 
-<!-- 10 · Q8 -->
-<section class="screen" data-s="10"><div class="wrap">
+<!-- 11 · Q8 -->
+<section class="screen" data-s="11"><div class="wrap">
   <div class="group">What's on your mind</div>
   <h2>Which worries you most?</h2>
   <p class="hint">Choose your top 3, in order. Your first tap is your biggest worry.</p>
@@ -510,16 +523,16 @@
   <div class="need">Please choose three to continue.</div>
 </div></section>
 
-<!-- 11 · Q9 -->
-<section class="screen" data-s="11"><div class="wrap">
+<!-- 12 · Q9 -->
+<section class="screen" data-s="12"><div class="wrap">
   <div class="group">What's on your mind</div>
   <h2>If you could move your tax residency tomorrow with no hassle, where would you go?</h2>
   <p class="hint">Optional.</p>
   <input type="text" name="dream_residence" placeholder="A country, a city, or 'I'd stay'" autocomplete="off">
 </div></section>
 
-<!-- 12 · Q10 -->
-<section class="screen" data-s="12"><div class="wrap">
+<!-- 13 · Q10 -->
+<section class="screen" data-s="13"><div class="wrap">
   <div class="group">What's on your mind</div>
   <h2>Have you already done any structuring?</h2>
   <p class="hint">For example a holding company, a trust or foundation, a second residency, or a special regime for new residents such as Spain's Beckham law, Italy's flat tax or Portugal's IFICI.</p>
@@ -532,16 +545,16 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 13 · Q11 -->
-<section class="screen" data-s="13"><div class="wrap">
+<!-- 14 · Q11 -->
+<section class="screen" data-s="14"><div class="wrap">
   <div class="group">What's on your mind</div>
   <h2>What is the one question you would ask a tax expert if nobody was listening?</h2>
   <p class="hint">Optional, and the most useful answer on this form.</p>
   <textarea name="one_question" placeholder="My question is…"></textarea>
 </div></section>
 
-<!-- 14 · Q12 -->
-<section class="screen" data-s="14"><div class="wrap">
+<!-- 15 · Q12 -->
+<section class="screen" data-s="15"><div class="wrap">
   <div class="group">The session</div>
   <h2>Which do you prefer for the session?</h2>
   <div class="choices" data-name="format_pref" data-max="1" data-req>
@@ -552,8 +565,8 @@
   <div class="need">Please choose one to continue.</div>
 </div></section>
 
-<!-- 15 · Q13 -->
-<section class="screen" data-s="15"><div class="wrap">
+<!-- 16 · Q13 -->
+<section class="screen" data-s="16"><div class="wrap">
   <div class="group">The session</div>
   <h2>Would you be willing to share your own experience on one of these topics during the session?</h2>
   <div class="choices" data-name="share" data-max="1" data-req>
@@ -566,16 +579,15 @@
   <div class="err" id="err">Something interrupted the sending. Please try again in a moment.</div>
 </div></section>
 
-<!-- 16 · THANK YOU -->
-<section class="screen end" data-s="16"><div class="wrap">
+<!-- 17 · THANK YOU -->
+<section class="screen end" data-s="17"><div class="wrap">
   <img class="logo" src="img/eo25.jpg" alt="EO Barcelona, celebrating 25 years">
   <div class="label">Thank you for your answers</div>
-  <h2>Thank you. You're in.</h2>
-  <p class="body">Your answers will shape the conversation on <b style="color:#fff">Thursday 19 November at 16:00 CET</b>. Here is everything you need to join.</p>
+  <h2>Thank you. Your place is confirmed.</h2>
+  <p class="body">Your answers will shape the conversation on <b style="color:#fff">Thursday 19 November at 16:00 CET</b>. We will email you the call link closer to the date.</p>
   <div class="join">
-    <a class="btn" id="joinbtn" target="_blank" rel="noopener">Join the call</a>
-    <a class="btn ghost" id="calbtn" download="tax-wealth-your-next-move.ics">Add to my calendar</a>
-    <small id="joinnote">Save this page or add it to your calendar: the link is only shown here.</small>
+    <a class="btn" id="calbtn" download="tax-wealth-your-next-move.ics">Add to my calendar</a>
+    <small>Keep the date free. The call link will reach you by email.</small>
   </div>
   <p class="body">Bring your experience and your toughest question.</p>
   <div class="sig">See you there</div>
@@ -591,9 +603,9 @@
 <script>
 /* Where answers go. Empty = preview mode: nothing leaves the page. */
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbzNv17laQ19vUrIZRSRd9I9jj67ewkoQ3RLa7yGIsvpjLZSJ0XUsNdZwYGBggOWYFj-bw/exec";
-/* The call link shown on the thank-you page. Add the Zoom link before publishing. */
+/* The call link is emailed closer to the date, so it is not shown here. */
 const CALL_LINK = "";
-const FIRST_Q = 3, LAST_Q = 15, END = 16, NQ = LAST_Q - FIRST_Q + 1;
+const NAME_S = 3, FIRST_Q = 4, LAST_Q = 16, END = 17, NQ = LAST_Q - FIRST_Q + 1;
 let cur = 0;
 const data = {};
 
@@ -668,7 +680,7 @@ function go(n){
   document.getElementById('top').classList.toggle('hide', !inFlow);
   document.getElementById('nav').classList.toggle('hide', !inFlow);
   document.getElementById('back').hidden = n <= 1;
-  document.getElementById('next').textContent = n === LAST_Q ? 'Submit and confirm my place' : (n === FIRST_Q - 1 ? 'Start the survey' : 'Continue');
+  document.getElementById('next').textContent = n === LAST_Q ? 'Submit and confirm my place' : (n === NAME_S ? 'Start the survey' : 'Continue');
   const q = inQ ? n - FIRST_Q + 1 : 0;
   document.getElementById('barfill').style.width = (q / NQ * 100) + '%';
   document.getElementById('count').textContent = inQ ? `${q} / ${NQ}` : '';
@@ -689,10 +701,12 @@ async function send(){
   for (const [k, v] of Object.entries(data)) answers[k] = v;
   ['residence_other','dream_residence','one_question'].forEach(n => { const el = document.querySelector(`[name="${n}"]`); if (el && el.value.trim()) answers[n] = el.value.trim(); });
   if (Array.isArray(answers.worries)) answers.worries = answers.worries.map((w, i) => `${i + 1}. ${w}`);
+  /* The name travels beside the answers, never inside them: the script files it on a separate sheet. */
+  const name = document.getElementById('full_name').value.trim();
   const btn = document.getElementById('next'); btn.textContent = 'Sending…'; btn.disabled = true;
   try {
-    if (ENDPOINT) await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ answers }) });
-    else console.log('Preview mode, not sent:', JSON.stringify({ answers }));
+    if (ENDPOINT) await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ name, answers }) });
+    else console.log('Preview mode, not sent:', JSON.stringify({ name, answers }));
     go(END);
   } catch (e) {
     document.getElementById('err').style.display = 'block';
@@ -702,9 +716,6 @@ async function send(){
 
 /* Thank-you page: call link + calendar file (19 Nov 2026, 16:00 to 17:30 CET = 15:00 to 16:30 UTC) */
 (function(){
-  const join = document.getElementById('joinbtn');
-  if (CALL_LINK) join.href = CALL_LINK;
-  else { join.removeAttribute('href'); join.textContent = 'Call link coming soon'; join.style.opacity = '.6'; join.style.cursor = 'default'; }
   const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//EO Barcelona//Roundtable//EN','BEGIN:VEVENT',
     'UID:tax-wealth-next-move-20261119@eobarcelona','DTSTAMP:20261019T000000Z',
     'DTSTART:20261119T150000Z','DTEND:20261119T163000Z',
