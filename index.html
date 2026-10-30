@@ -278,7 +278,7 @@
     </div>
     <div class="anon">
       <b>Your answers stay anonymous</b>
-      <p>We ask for your name for one reason only: to check that you completed the survey, since it is required to join the session. Your name is stored separately from your answers, so they can never be traced back to you. Your answers are only used to shape this session.</p>
+      <p>We ask for your name and email for one reason only: to check that you completed the survey, since it is required to join the session. They are stored separately from your answers, so they can never be traced back to you. Your answers are only used to shape this session.</p>
     </div>
     <button type="button" class="btn" onclick="go(1)">Begin</button>
   </div>
@@ -387,20 +387,24 @@
 <!-- 3 · NAME (attendance check only, stored apart from the answers) -->
 <section class="screen" data-s="3"><div class="wrap">
   <div class="label">Confirm your place</div>
-  <h2>What is your name?</h2>
-  <p class="hint">Completing this survey is required to attend the roundtable. We only use your name to check that you have completed it, so we can send you the call link closer to the date.</p>
+  <h2>Your name and email</h2>
+  <p class="hint">Completing this survey is required to attend the roundtable. We only use your name and email to check that you have completed it, so we can send you the call link closer to the date.</p>
   <div class="field">
     <label for="full_name">First and last name (required)</label>
     <input type="text" id="full_name" name="full_name" placeholder="First and last name" autocomplete="name" data-req>
   </div>
-  <div class="private"><span>◆</span><span>Your name is saved on a separate list from your answers. Nobody, including the hosts and the chapter, can link your name to what you answer next.</span></div>
-  <div class="need">Please add your name to continue.</div>
+  <div class="field">
+    <label for="email">Email (required) · please use the one you registered with on Luma</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" data-req data-email>
+  </div>
+  <div class="private"><span>◆</span><span>Your name and email are saved on a separate list from your answers. Nobody, including the hosts and the chapter, can link them to what you answer next.</span></div>
+  <div class="need">Please add your name and a valid email to continue.</div>
 </div></section>
 
 <!-- 4 · Q1 -->
 <section class="screen" data-s="4"><div class="wrap">
   <div class="group">About you</div>
-  <div class="private"><span>◆</span><span>From here on, your answers are anonymous. They are kept apart from your name and are seen only by the hosts and the chapter, to shape the session.</span></div>
+  <div class="private"><span>◆</span><span>From here on, your answers are anonymous. They are kept apart from your name and email and are seen only by the hosts and the chapter, to shape the session.</span></div>
   <h2>Where are you tax resident today?</h2>
   <div class="choices two" data-name="residence" data-max="1" data-req>
     <button type="button" class="choice" data-v="Spain"><span class="dot"></span><span class="t">Spain</span></button>
@@ -703,10 +707,11 @@ async function send(){
   if (Array.isArray(answers.worries)) answers.worries = answers.worries.map((w, i) => `${i + 1}. ${w}`);
   /* The name travels beside the answers, never inside them: the script files it on a separate sheet. */
   const name = document.getElementById('full_name').value.trim();
+  const email = document.getElementById('email').value.trim().toLowerCase();
   const btn = document.getElementById('next'); btn.textContent = 'Sending…'; btn.disabled = true;
   try {
-    if (ENDPOINT) await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ name, answers }) });
-    else console.log('Preview mode, not sent:', JSON.stringify({ name, answers }));
+    if (ENDPOINT) await fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ name, email, answers }) });
+    else console.log('Preview mode, not sent:', JSON.stringify({ name, email, answers }));
     go(END);
   } catch (e) {
     document.getElementById('err').style.display = 'block';
